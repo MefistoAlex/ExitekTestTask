@@ -57,6 +57,7 @@ final class ViewController: UIViewController {
             movies += [movie]
             tableView.reloadData()
             refreshTextFields()
+            view.endEditing(true)
         }
        
     }
