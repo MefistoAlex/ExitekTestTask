@@ -6,13 +6,13 @@
 //
 
 import UIKit
-
+let cellIdentifier = "MovieCell"
 final class ViewController: UIViewController {
-    private var movies: [Movie] = []
-
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var movieTitleTextField: UITextField!
     @IBOutlet private var movieYearTextField: UITextField!
+
+    private var movies: [Movie] = []
 
     // MARK: Lifecycle
 
@@ -24,38 +24,41 @@ final class ViewController: UIViewController {
     @IBAction func addButtonDidTab() {
         let movieTitle: String
         let movieYear: UInt
-        
-        if let title = movieTitleTextField.text, let yearText = movieYearTextField.text {
-            if !title.isEmpty {
-                movieTitle = title
-            } else {
-                showError("Enter title")
-                return
-            }
-            if !yearText.isEmpty {
-                if let year = UInt(yearText) {
-                    movieYear = year
-                } else {
-                    showError("Enter correct year. It must be Digit")
-                    return
-                }
-            } else {
-                showError("Enter year")
-                return
-            }
-        } else {
+
+        guard let title = movieTitleTextField.text,
+              let yearText = movieYearTextField.text else {
             showError("Enter movie title and year")
             return
         }
+
+        if !title.isEmpty {
+            movieTitle = title
+        } else {
+            showError("Enter title")
+            return
+        }
         
+        if !yearText.isEmpty {
+            if let year = UInt(yearText) {
+                movieYear = year
+            } else {
+                showError("Enter correct year. It must be Digit")
+                return
+            }
+        } else {
+            showError("Enter year")
+            return
+        }
+
         let movie = Movie(title: movieTitle, year: movieYear)
         if movies.contains(movie) {
             showError("Movies can't be duplicated")
         } else {
             movies += [movie]
             tableView.reloadData()
+            refreshTextFields()
         }
-        refreshTextFields()
+       
     }
 
     // MARK: Privates
@@ -72,14 +75,6 @@ final class ViewController: UIViewController {
     }
 }
 
-// MARK: Delegate
-
-extension ViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
 // MARK: Data Source
 
 extension ViewController: UITableViewDataSource {
@@ -88,7 +83,7 @@ extension ViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         cell.textLabel?.text = movies[indexPath.row].description
         return cell
     }
