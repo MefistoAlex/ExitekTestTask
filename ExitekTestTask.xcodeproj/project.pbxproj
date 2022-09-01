@@ -14,6 +14,7 @@
 		B0A3D1E528BF889E005143CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0A3D1E428BF889E005143CF /* Assets.xcassets */; };
 		B0A3D1E828BF889E005143CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0A3D1E628BF889E005143CF /* LaunchScreen.storyboard */; };
 		B0A3D1F328BF8E13005143CF /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A3D1F228BF8E13005143CF /* Movie.swift */; };
+		B0D1618A28C07BED00F3CD42 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = B0D1618928C07BED00F3CD42 /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0D1618A28C07BED00F3CD42 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +128,9 @@
 			dependencies = (
 			);
 			name = ExitekTestTask;
+			packageProductDependencies = (
+				B0D1618928C07BED00F3CD42 /* OrderedCollections */,
+			);
 			productName = ExitekTestTask;
 			productReference = B0A3D1D828BF889C005143CF /* ExitekTestTask.app */;
 			productType = "com.apple.product-type.application";
@@ -154,6 +159,9 @@
 				Base,
 			);
 			mainGroup = B0A3D1CF28BF889C005143CF;
+			packageReferences = (
+				B0D1618828C07BED00F3CD42 /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
 			productRefGroup = B0A3D1D928BF889C005143CF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -402,6 +410,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B0D1618828C07BED00F3CD42 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B0D1618928C07BED00F3CD42 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B0D1618828C07BED00F3CD42 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B0A3D1D028BF889C005143CF /* Project object */;
 }
