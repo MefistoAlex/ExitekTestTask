@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Movie: Equatable {
+struct Movie: Hashable {
     let title: String
     let year: UInt
     var description: String {
