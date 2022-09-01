@@ -5,9 +5,8 @@
 //  Created by Alexandr Mefisto on 31.08.2022.
 //
 
-
-import UIKit
 import OrderedCollections
+import UIKit
 let cellIdentifier = "MovieCell"
 final class ViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
@@ -55,13 +54,12 @@ final class ViewController: UIViewController {
         let movie = Movie(title: movieTitle, year: movieYear)
         let result = movies.append(movie)
         if result.inserted {
-            tableView.reloadData()
+            tableView.insertRows(at: [IndexPath(row: movies.count - 1, section: 0)], with: .automatic)
             refreshTextFields()
             view.endEditing(true)
         } else {
             showError("Movies can't be duplicated")
         }
-        
     }
 
     // MARK: Privates
