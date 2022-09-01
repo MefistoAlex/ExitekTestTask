@@ -5,14 +5,16 @@
 //  Created by Alexandr Mefisto on 31.08.2022.
 //
 
+
 import UIKit
+import OrderedCollections
 let cellIdentifier = "MovieCell"
 final class ViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var movieTitleTextField: UITextField!
     @IBOutlet private var movieYearTextField: UITextField!
 
-    private var movies: [Movie] = []
+    private var movies = OrderedSet<Movie>()
 
     // MARK: Lifecycle
 
@@ -37,7 +39,7 @@ final class ViewController: UIViewController {
             showError("Enter title")
             return
         }
-        
+
         if !yearText.isEmpty {
             if let year = UInt(yearText) {
                 movieYear = year
@@ -51,15 +53,15 @@ final class ViewController: UIViewController {
         }
 
         let movie = Movie(title: movieTitle, year: movieYear)
-        if movies.contains(movie) {
-            showError("Movies can't be duplicated")
-        } else {
-            movies += [movie]
+        let result = movies.append(movie)
+        if result.inserted {
             tableView.reloadData()
             refreshTextFields()
             view.endEditing(true)
+        } else {
+            showError("Movies can't be duplicated")
         }
-       
+        
     }
 
     // MARK: Privates
